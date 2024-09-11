@@ -25,12 +25,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>register">Register</a>
-                    </li>
+
+                    <?php if (session()->get('isLoggedIn')): ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
+                        </li>
+                    <?php else: ?>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url(); ?>register">Register</a>
+                        </li>
+
+                    <?php endif ?>
                 </ul>
             </div>
         </div>
