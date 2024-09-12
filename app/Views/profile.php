@@ -26,7 +26,7 @@
                             <div class="mb-3">
                                 <label for="email" class="form-label fw-medium">Email</label>
                                 <input type="email" class="form-control" id="email"
-                                    placeholder="Please enter your email">
+                                    placeholder="Please enter your email" value="<?= $email ?>">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label fw-medium">Password</label>

@@ -8,21 +8,19 @@
 <section class="py-5 mb-5 bg-white">
     <div class="container ">
 
-        <form>
+        <form method="post" action="<?php echo base_url();?>login">
             <div class="row justify-content-md-center">
                 <div class="col-md-10">
                     <div class="card">
                         <div class="card-body">
                             <div class="mb-3">
                                 <label for="username" class="form-label fw-medium">Username</label>
-                                <input type="text" class="form-control" id="username"
+                                <input type="text" class="form-control" name="username"
                                     placeholder="Please enter your username">
                             </div>
-
-
                             <div class="mb-3">
                                 <label for="password" class="form-label fw-medium">Password</label>
-                                <input type="password" class="form-control" id="password"
+                                <input type="password" class="form-control" name="password"
                                     placeholder="Please enter your password">
                             </div>
 
@@ -35,3 +33,13 @@
 
     </div>
 </section>
+
+
+<?php if (session()->getFlashdata('error')) { ?>
+<script>
+Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: " <?php echo session()->getFlashdata('error'); ?>",
+});</script>
+<?php } ?>

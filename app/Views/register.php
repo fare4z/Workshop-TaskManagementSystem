@@ -10,28 +10,36 @@
         <div class="card">
             <div class="card-header text-white" style="background-color: darkblue;">Register</div>
             <div class="card-body">
-                <form>
+
+            <?php if (session()->getFlashdata('error')) { ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo session()->getFlashdata('error'); ?>
+                            </div>
+                            <?php } ?>
+
+
+                <form method="post" action="<?php echo base_url();?>register">
                     <div class="row justify-content-md-center">
                         <div class="col-md-10">
                             <div class="mb-3">
                                 <label for="name" class="form-label fw-medium">Full Name</label>
-                                <input type="text" class="form-control" id="name"
+                                <input type="text" class="form-control" name="name"
                                     placeholder="Please enter your full name">
                             </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label fw-medium">Username</label>
-                                <input type="text" class="form-control" id="username"
+                                <input type="text" class="form-control" name="username"
                                     placeholder="Please enter your username">
                             </div>
 
                             <div class="mb-3">
                                 <label for="email" class="form-label fw-medium">Email</label>
-                                <input type="email" class="form-control" id="email"
+                                <input type="email" class="form-control" name="email"
                                     placeholder="Please enter your email">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label fw-medium">Password</label>
-                                <input type="password" class="form-control" id="password"
+                                <input type="password" class="form-control" name="password"
                                     placeholder="Please enter your password">
                             </div>
                             <div class="d-grid gap-2">
@@ -44,3 +52,12 @@
         </div>
     </div>
 </section>
+
+<?php if (session()->getFlashdata('error')) { ?>
+<script>
+Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: " <?php echo session()->getFlashdata('error'); ?>",
+});</script>
+<?php } ?>
