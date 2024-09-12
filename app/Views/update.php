@@ -18,6 +18,10 @@
                               <textarea name="description" class="form-control"><?= $task['description'] ?></textarea>
                           </div>
                           <div class="form-group">
+                              <label>Due Date:</label>
+                              <input type="date" name="duedate" class="form-control" value="<?= $task['due_date'] ?>">
+                          </div>
+                          <div class="form-group">
                               <label>Status:</label>
                               <?php echo form_dropdown('status', $status, $task['status'], ['class' => 'form-control']); ?>
                           </div>

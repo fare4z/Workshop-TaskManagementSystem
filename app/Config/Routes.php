@@ -24,3 +24,4 @@ $routes->get('/newtask', 'TaskController::newtask', ['filter' => 'auth']);
 $routes->post('/process_newtask', 'TaskController::process_newtask');
 $routes->get('/update/(:num)', 'TaskController::update/$1');
 $routes->post('/process_update/(:num)', 'TaskController::process_update/$1');
+$routes->get('/delete/(:num)', 'TaskController::delete/$1');

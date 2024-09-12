@@ -28,7 +28,6 @@ class TaskController extends BaseController
 
     public function newtask()
     {
-
         return view('layout/header')
             . view('newTask')
             . view('layout/footer');
@@ -41,6 +40,7 @@ class TaskController extends BaseController
             'user_id' => session()->get('username'),
             'title' => $this->request->getPost('title'),
             'description' => $this->request->getPost('description'),
+            'due_date' => $this->request->getPost('duedate'),
         ];
 
         $taskModel->save($data);
@@ -74,10 +74,19 @@ class TaskController extends BaseController
             'title' => $this->request->getPost('title'),
             'description' => $this->request->getPost('description'),
             'status' => $this->request->getPost('status'),
+            'due_date' => $this->request->getPost('duedate'),
         ];
 
         $taskModel->update($id, $data);
         session()->setFlashdata('success', 'Task updated successfully');
+        return redirect()->to('/dashboard');
+    }
+
+    public function delete($id)
+    {
+        $taskModel = new TasksModel();
+        $taskModel->delete($id);
+        session()->setFlashdata('success', 'Task deleted successfully');
         return redirect()->to('/dashboard');
     }
 }

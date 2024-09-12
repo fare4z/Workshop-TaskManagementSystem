@@ -12,7 +12,7 @@ class AuthController extends BaseController
     public function home()
     {
         if (session()->get('isLoggedIn')) {
-            return redirect()->to('/profile');
+            return redirect()->to('/dashboard');
         }
         return view('layout/header')
             . view('home')
@@ -21,6 +21,9 @@ class AuthController extends BaseController
 
     public function login()
     {
+        if (session()->get('isLoggedIn')) {
+            return redirect()->to('/dashboard');
+        }
 
         return view('layout/header')
             . view('login')
@@ -30,6 +33,10 @@ class AuthController extends BaseController
 
     public function register()
     {
+        if (session()->get('isLoggedIn')) {
+            return redirect()->to('/dashboard');
+        }
+        
         return view('layout/header')
             . view('register')
             . view('layout/footer');
@@ -79,11 +86,11 @@ class AuthController extends BaseController
                 'user_id'   => $checkUser['id'],
                 'username'  => $checkUser['username'],
                 'email'     => $checkUser['email'],
-                'fullname'  => $checkUser['name'],
+                'fullname'  => $checkUser['fullname'],
                 'isLoggedIn' => true,
             ]);
 
-            return redirect()->to('/profile');
+            return redirect()->to('/dashboard');
         } else {
             return redirect()->back()->with('error', 'Invalid Credentials');
         }
@@ -100,9 +107,9 @@ class AuthController extends BaseController
     {
         $data = array();
 
-        $data['nama'] = "MUHAMMAD FAREEZ BIN BORHANUDIN";
-        $data['username'] = "fareez";
-        $data['email'] = "fareez@psp.edu.my";
+        $data['nama'] = session()->get('fullname');
+        $data['username'] = session()->get('username');
+        $data['email'] = session()->get('email');
         $data['password'] = "123456";
 
         return view('layout/header')

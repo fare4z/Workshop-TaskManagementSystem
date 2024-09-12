@@ -14,6 +14,7 @@
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Title</th>
                         <th>Description</th>
                         <th>Due Date</th>
@@ -22,30 +23,39 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($tasks as $task): ?>
+                    <?php 
+                     $id = 1;
+                    foreach ($tasks as $task): 
+                       
+                        ?>
                         <tr>
-                            <td>
-                                <?= $task['title'] ?>
-                            </td>
-                            <td>
-                                <?= $task['description'] ?>
-                            </td>
+                            <td><?=$id?></td>
+                            <td><?= $task['title'] ?></td>
+                            <td><?= $task['description'] ?></td>
 
-                            <td>
-
-                            </td>
-
-                            <td>
-                                <?php echo $status[$task['status']]; ?>
-                            </td>
+                            <td><?=$task['due_date']?></td>
+                            <td><?php echo $status[$task['status']]; ?></td>
                             <td>
                                 <a href="<?php echo base_url(); ?>update/<?= $task['id'] ?>" class="btn btn-warning btn-sm">Update</a>
-                                <a href="/tasks/delete/<?= $task['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
+                                <a href="<?php echo base_url();?>delete/<?= $task['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
                             </td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php $id++;
+                 endforeach; ?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+
+<?php if (session()->getFlashdata('success')): ?>
+                   
+    <script>
+        Swal.fire({
+  title: "Success!!",
+  text: "<?php echo session()->getFlashdata('success'); ?>",
+  icon: "success"
+});
+</script>
+                <?php endif; ?>
