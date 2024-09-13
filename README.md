@@ -13,10 +13,21 @@
 ## Lab Activity 4 Final Result: Task Management System
 
 ### Screenshots
-![Screenshot 1](screenshoot/screenshot1.png)
-![Screenshot 2](screenshoot/screenshot2.png)
-![Screenshot 3](screenshoot/screenshot3.png)
-![Screenshot 4](screenshoot/screenshot4.png)
+
+<table>
+  <tr>
+    <td><img src="screenshot/screenshot1.png" width="300"/></td>
+    <td><img src="screenshot/screenshot2.png" width="300"/></td>
+  </tr>
+  <tr>
+    <td><img src="screenshot/screenshot3.png" width="300"/></td>
+    <td><img src="screenshot/screenshot4.png" width="300"/></td>
+  </tr>
+  <tr>
+    <td><img src="screenshot/screenshot5.png" width="300"/></td>
+    <td><img src="screenshot/screenshot6.png" width="300"/></td>
+  </tr>
+</table>
 
 ---
 
