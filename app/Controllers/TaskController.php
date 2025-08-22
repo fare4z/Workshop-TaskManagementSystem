@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\TasksModel;
+use Config\Services;
 
 class TaskController extends BaseController
 {
@@ -73,15 +74,53 @@ class TaskController extends BaseController
         $taskModel = new TasksModel();
 
         $data = [
-            'title' => $this->request->getPost('title'),
+            'title'       => $this->request->getPost('title'),
             'description' => $this->request->getPost('description'),
-            'status' => $this->request->getPost('status'),
-            'due_date' => $this->request->getPost('duedate'),
+            'status'      => $this->request->getPost('status'),
+            'due_date'    => $this->request->getPost('duedate'),
         ];
 
         $taskModel->update($id, $data);
-        session()->setFlashdata('success', 'Task updated successfully');
+        $action = $this->request->getPost('action');
+
+        if ($action === 'update_email') {
+            $this->sendTaskUpdateEmail($id, $data);
+            session()->setFlashdata('success', 'Task updated & email sent');
+        } else {
+            session()->setFlashdata('success', 'Task updated successfully');
+        }
+
         return redirect()->to('/dashboard');
+    }
+
+    private function sendTaskUpdateEmail(int $taskId, array $data): void
+    {
+        $toEmail = session()->get('email'); // atau set ke email lain
+        if (!$toEmail) return;
+
+        $statusMap = [
+            '0' => 'Pending',
+            '1' => 'Completed',
+            '2' => 'In Progress',
+        ];
+
+        $statusText = $statusMap[$data['status']] ?? $data['status'];
+
+        $msg = "
+            <p><strong>Task Updated</strong></p>
+            <p><strong>Title:</strong> ".esc($data['title'])."</p>
+            <p><strong>Description:</strong> ".nl2br(esc($data['description']))."</p>
+            <p><strong>Status:</strong> ".esc($statusText)."</p>
+            <p><strong>Due Date:</strong> ".esc($data['due_date'])."</p>
+            <p>Task ID: {$taskId}</p>
+        ";
+
+        $email = Services::email();
+        $email->setTo($toEmail);
+        $email->setSubject('Task Updated: '.($data['title'] ?? ''));
+        $email->setMessage($msg);
+        $email->setMailType('html');
+        @$email->send();
     }
 
     public function delete($id)
