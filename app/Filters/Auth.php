@@ -25,8 +25,24 @@ class Auth implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/login');
+        $session = session();
+        // 1) Must be logged in
+        if (!$session->get('isLoggedIn')) {
+            return redirect()->to('/login')->with('error', 'Please login first');
+        }
+
+        // 2) Optional role checks: use like 'auth:admin,lecturer'
+        if ($arguments && is_array($arguments) && count($arguments) > 0) {
+            $userRole = (string) $session->get('role');
+            if ($userRole === '') {
+                return redirect()->to('/')->with('error', 'Access denied');
+            }
+
+            // allow multiple roles: admin,lecturer,staff
+            $allowed = array_map('trim', $arguments);
+            if (! in_array($userRole, $allowed, true)) {
+                return redirect()->to('/')->with('error', 'Access denied');
+            }
         }
     }
 

@@ -11,7 +11,9 @@ class TaskController extends BaseController
     public function dashboard()
     {
         $taskModel = new TasksModel();
-        $data['tasks'] = $taskModel->findAll();
+
+        // display task based on user
+        $data['tasks'] = $taskModel->where('user_id', session()->get('username'))->findAll();
 
         $ktrgn_status = [
             '0' => 'Pending',

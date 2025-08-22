@@ -44,6 +44,10 @@ $currentRoute = service('router')->methodName();
                         </li>
 
                         <li class="nav-item">
+                            <a class="nav-link <?php if($currentRoute=="users") { echo "active";} ?>" href="<?php echo base_url(); ?>admin/users">Users</a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
                         </li>
                     <?php else: ?>

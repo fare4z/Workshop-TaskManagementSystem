@@ -11,7 +11,7 @@ class AuthController extends BaseController
 
     public function home()
     {
-       return view('layout/header')
+        return view('layout/header')
             . view('home')
             . view('layout/footer');
     }
@@ -40,7 +40,8 @@ class AuthController extends BaseController
             . view('layout/footer');
     }
 
-    public function process_register() {
+    public function process_register()
+    {
         $userModel = new UserModel();
 
         $name = $this->request->getPost('name');
@@ -63,10 +64,10 @@ class AuthController extends BaseController
 
         $userModel->insert($data);
         return redirect()->to('/login')->with('success', 'Register success');
-
     }
 
-    public function process_login() {
+    public function process_login()
+    {
 
         $userModel = new UserModel();
 
@@ -82,9 +83,12 @@ class AuthController extends BaseController
 
         if ($checkUser && password_verify($data['password'], $checkUser['password'])) {
             session()->set([
+                'id'        => $checkUser['id'],
                 'username'  => $checkUser['username'],
                 'email'     => $checkUser['email'],
                 'fullname'  => $checkUser['fullname'],
+                'role'      => $checkUser['role'],
+                'photo'     => $checkUser['photo'] ?? 'uploads/profile/default.png',
                 'isLoggedIn' => true,
             ]);
 
@@ -92,7 +96,6 @@ class AuthController extends BaseController
         } else {
             return redirect()->back()->with('error', 'Invalid Credentials');
         }
-
     }
 
     public function profile()
@@ -102,12 +105,54 @@ class AuthController extends BaseController
         $data['nama'] = session()->get('fullname');
         $data['username'] = session()->get('username');
         $data['email'] = session()->get('email');
-        $data['password'] = "123456";
+        $data['photo'] = session()->get('photo') ?? 'uploads/profile/default.png';
 
         return view('layout/header')
             . view('profile', $data)
             . view('layout/footer');
     }
+
+    public function update_profile()
+    {
+        $userModel = new UserModel();
+
+        $id = session()->get('id'); // pastikan id diset masa login
+        $name = $this->request->getPost('name');
+        $username = $this->request->getPost('username');
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+
+        $data = [
+            'fullname' => $name,
+            'username' => $username,
+            'email'    => $email,
+        ];
+
+        if (!empty($password)) {
+            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+        }
+
+        // Handle photo upload
+        $img = $this->request->getFile('photo');
+        if ($img && $img->isValid() && !$img->hasMoved()) {
+            $newName = $img->getRandomName();
+            $img->move(FCPATH . 'uploads/profile/', $newName);
+            $data['photo'] = 'uploads/profile/' . $newName;
+        }
+
+        $userModel->update($id, $data);
+
+        // Update session
+        session()->set([
+            'fullname' => $data['fullname'],
+            'username' => $data['username'],
+            'email'    => $data['email'],
+            'photo'    => $data['photo'] ?? session()->get('photo'),
+        ]);
+
+        return redirect()->to('/profile')->with('success', 'Profile updated successfully');
+    }
+
 
     public function logout()
     {
