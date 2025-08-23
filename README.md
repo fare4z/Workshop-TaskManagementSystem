@@ -10,7 +10,7 @@
 
 ---
 
-## Lab Activity 4 Final Result: Task Management System
+## Final Output: Task Management System
 
 ### Screenshots
 
@@ -27,11 +27,22 @@
     <td><img src="screenshot/screenshot5.png" width="300"/></td>
     <td><img src="screenshot/screenshot6.png" width="300"/></td>
   </tr>
+
+  <tr>
+    <td><img src="screenshot/screenshot7.png" width="300"/></td>
+    <td><img src="screenshot/screenshot8.png" width="300"/></td>
+  </tr>
+
 </table>
 
 ---
 
 ### Steps to Run the Project
+
+### Important Notes for Running the Project
+
+> **Note**: The following commands need to be executed in Command Prompt (CMD) or Terminal.
+
 
 1. **Clone the repository**:
    ```bash
@@ -49,8 +60,19 @@
    ```
 
 4. **Set up the environment file**:
-   - Duplicate `.env.example` and rename it to `.env`.
+   - Duplicate `env` and rename it to `.env`.
+   '''bash
+   cp env .env
+   '''
+
    - Modify the necessary configurations like database settings.
+
+5. **Create Database**:
+   - Create a new database named `dbTaskDemo` in your MySQL server.
+
+   '''bash
+   php spark db:create dbTaskDemo
+   '''
 
 5. **Run migration files**:
    ```bash
@@ -71,9 +93,12 @@
 
 ---
 
+
 ## Notes & Materials
-For further reading and additional materials, visit [here](https://fare4z.com/url/Ry8d7).
+
+For further reading and additional materials, visit <a href="https://url.fare4z.com/CxsnC" target="_blank">here</a>.
+
 
 ## Email Setup
 To enable email functionality in the application, follow these steps:
-1. Sign up for a MailTrap account at [MailTrap](https://mailtrap.io/).
+1. Sign up for a MailTrap account at <a href="https://mailtrap.io/" target="_blank">MailTrap</a>.
