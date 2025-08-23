@@ -67,12 +67,3 @@
 #--------------------------------------------------------------------
 
 # logger.threshold = 4
-<!-- email.fromEmail = 'fareez.psp@gmail.com'
-email.fromName  = 'TaskApp'
-email.protocol  = smtp
-email.SMTPHost  = smtp.sendgrid.net
-email.SMTPUser  = apikey
-email.SMTPPass  = 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
-email.SMTPPort  = 587
-email.SMTPCrypto = tls
-email.mailType  = html -->

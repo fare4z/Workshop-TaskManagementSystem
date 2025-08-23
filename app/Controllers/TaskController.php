@@ -115,6 +115,12 @@ class TaskController extends BaseController
             <p>Task ID: {$taskId}</p>
         ";
 
+        Services::logger()->info('Sending task update email', ['to' => $toEmail, 'subject' => 'Task Updated: '.($data['title'] ?? '')]);
+
+        Services::email()->setTo($toEmail)
+            ->setSubject('Task Updated: '.($data['title'] ?? ''))
+            ->setMessage($msg);
+
         $email = Services::email();
         $email->setTo($toEmail);
         $email->setSubject('Task Updated: '.($data['title'] ?? ''));

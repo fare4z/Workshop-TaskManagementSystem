@@ -57,14 +57,23 @@
    php spark migrate
    ```
 
-6. **Run the local development server**:
+6. **Run seed files**:
+   ```bash
+   php spark db:seed UserSeeder
+   ```
+
+7. **Run the local development server**:
    ```bash
    php spark serve
    ```
 
-7. Access the application via `http://localhost:8080`.
+8. Access the application via `http://localhost:8080`.
 
 ---
 
 ## Notes & Materials
 For further reading and additional materials, visit [here](https://fare4z.com/url/Ry8d7).
+
+## Email Setup
+To enable email functionality in the application, follow these steps:
+1. Sign up for a MailTrap account at [MailTrap](https://mailtrap.io/).
