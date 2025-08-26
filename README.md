@@ -2,6 +2,10 @@
 **Date**: 10 - 12 September 2024  
 **Venue**: E14, Politeknik Seberang Perai  
 
+# Bengkel Intensif CodeIgniter 4
+**Date**: 23 August 2025  
+**Venue**: E14, Politeknik Seberang Perai  
+
 ## Agenda
 1. Introduction to Full Stack Web Development
 2. Version Control System (VCS)
@@ -11,6 +15,8 @@
 ---
 
 ## Final Output: Task Management System
+// Demo URL 
+**URL**: <a href="https://url.fare4z.com/lyTMr" target="_blank">https://demo.fare4z.com</a>
 
 ### Screenshots
 
@@ -61,9 +67,9 @@
 
 4. **Set up the environment file**:
    - Duplicate `env` and rename it to `.env`.
-   '''bash
-   cp env .env
-   '''
+   ```bash
+   copy env .env
+   ```
 
    - Modify the necessary configurations like database settings.
 
