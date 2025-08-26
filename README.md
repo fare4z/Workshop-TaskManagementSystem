@@ -70,9 +70,9 @@
 5. **Create Database**:
    - Create a new database named `dbTaskDemo` in your MySQL server.
 
-   '''bash
+   ```bash
    php spark db:create dbTaskDemo
-   '''
+   ```
 
 5. **Run migration files**:
    ```bash
