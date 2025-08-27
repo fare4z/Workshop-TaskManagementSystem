@@ -56,3 +56,15 @@
         </div>
     </div>
 </section>
+
+<!-- SweetAlert2 Message -->
+<?php if (session()->getFlashdata('success')): ?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: '<?= session()->getFlashdata('success') ?>',
+            confirmButtonText: 'OK'
+        });
+    </script>
+<?php endif; ?>

@@ -43,9 +43,11 @@ $currentRoute = service('router')->methodName();
                             <a class="nav-link <?php if($currentRoute=="profile") { echo "active";} ?>" aria-current="page" href="<?php echo base_url(); ?>profile">Profile</a>
                         </li>
 
+                        <?php if (session()->get('role') === 'admin'): ?>
                         <li class="nav-item">
-                            <a class="nav-link <?php if($currentRoute=="users") { echo "active";} ?>" href="<?php echo base_url(); ?>admin/users">Users</a>
+                            <a class="nav-link <?php if($currentRoute=="users") { echo "active";} ?>" href="<?php echo base_url(); ?>admin/users">Users List</a>
                         </li>
+                        <?php endif; ?>
 
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>

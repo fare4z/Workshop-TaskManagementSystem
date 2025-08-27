@@ -106,14 +106,31 @@ class TaskController extends BaseController
 
         $statusText = $statusMap[$data['status']] ?? $data['status'];
 
-        $msg = "
-            <p><strong>Task Updated</strong></p>
-            <p><strong>Title:</strong> ".esc($data['title'])."</p>
-            <p><strong>Description:</strong> ".nl2br(esc($data['description']))."</p>
-            <p><strong>Status:</strong> ".esc($statusText)."</p>
-            <p><strong>Due Date:</strong> ".esc($data['due_date'])."</p>
-            <p>Task ID: {$taskId}</p>
-        ";
+                $badgeColor = '#f0ad4e'; 
+                if ($data['status'] == '1') $badgeColor = '#5cb85c'; 
+                elseif ($data['status'] == '2') $badgeColor = '#0275d8';
+
+                $msg = '
+                <div style="background:#f7f7f9;padding:40px 0;font-family:Segoe UI,Arial,sans-serif;">
+                    <div style="max-width:480px;margin:0 auto;background:#fff;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden;">
+                        <div style="background:#007bff;color:#fff;padding:24px 32px 16px 32px;text-align:center;">
+                            <h2 style="margin:0;font-size:1.7em;letter-spacing:1px;">Task Update Notification</h2>
+                        </div>
+                        <div style="padding:28px 32px 18px 32px;">
+                            <h3 style="margin-top:0;margin-bottom:10px;font-size:1.2em;">'.esc($data['title']).'</h3>
+                            <div style="margin-bottom:18px;">
+                                <span style="display:inline-block;padding:4px 14px;font-size:0.95em;border-radius:12px;background:'.$badgeColor.';color:#fff;font-weight:600;">'.esc($statusText).'</span>
+                            </div>
+                            <p style="margin:0 0 12px 0;"><strong>Description:</strong><br>'.nl2br(esc($data['description'])).'</p>
+                            <p style="margin:0 0 8px 0;"><strong>Due Date:</strong> <span style="color:#007bff;">'.esc($data['due_date']).'</span></p>
+                            <p style="margin:0 0 8px 0;font-size:0.97em;color:#888;"><strong>Task ID:</strong> {$taskId}</p>
+                        </div>
+                        <div style="background:#f1f3f6;padding:16px 32px;text-align:center;font-size:0.98em;color:#888;">
+                            <em>Thank you for using Task Management System!</em>
+                        </div>
+                    </div>
+                </div>';
+    
 
         Services::logger()->info('Sending task update email', ['to' => $toEmail, 'subject' => 'Task Updated: '.($data['title'] ?? '')]);
 
