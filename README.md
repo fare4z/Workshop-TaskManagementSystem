@@ -15,8 +15,8 @@
 ---
 
 ## Final Output: Task Management System
-// Demo URL 
-**URL**: <a href="https://url.fare4z.com/lyTMr" target="_blank">https://demo.fare4z.com</a>
+
+**URL**: <a href="https://url.fare4z.com/lyTMr" target="_blank">url.fare4z.com/lyTMr</a>
 
 ### Screenshots
 
